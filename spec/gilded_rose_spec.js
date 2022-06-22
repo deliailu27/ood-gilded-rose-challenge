@@ -36,6 +36,44 @@ describe("Gilded Rose", function() {
     expect(result).toEqual(expected)
   })
 
+  it('Sulfuras does not decrease in quality',function(){
+    const gildedRose = new Shop([new Item("Sulfuras, Hand of Ragnaros", -1, 80)]);
+    const result= gildedRose.updateQuality()[0].quality 
+    const expected = 80
+
+    expect(result).toEqual(expected)
+  })
+
+
+  it('Backstage pass increase quality before date passes',function(){
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)]);
+    const result = gildedRose.updateQuality()[0].quality
+    const expected = 21
+
+    expect(result).toEqual(expected)
+  })
+
+  it('Backstage passes quality drop to 0 after date passes',function(){
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20)]);
+    const days= 16
+    for (let day=0; day<days; day++) {
+      gildedRose.updateQuality();
+    }
+    const result = gildedRose.items[0].quality
+    const expected =0
+
+    expect(result).toEqual(expected)
+  })
+
+  it('Backstage passes increase quality by 2 when 10 days left', function(){
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49)]);
+    const result = gildedRose.updateQuality()[0].quality
+    const expected = 51
+
+
+    expect(result).toEqual(expected)
+  })
+
 
   
 
