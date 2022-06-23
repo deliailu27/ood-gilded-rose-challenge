@@ -1,4 +1,4 @@
-var {Shop, Item} = require('../src/gilded_rose.js');
+var {Shop, Item} = require('../src/gilded_rose_new.js');
 describe("Gilded Rose", function() {
 
   it("should foo", function() {
@@ -68,7 +68,7 @@ describe("Gilded Rose", function() {
   it('Backstage passes increase quality by 2 when 10 days left', function(){
     const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49)]);
     const result = gildedRose.updateQuality()[0].quality
-    const expected = 51
+    const expected = 50
 
 
     expect(result).toEqual(expected)
